@@ -17,7 +17,7 @@ var config = {
     module: {
         rules: [
             {
-                test: /\.ts?x/,
+                test: /\.tsx?/,
                 use: 'ts-loader',
                 exclude: /node_modules/
             }
