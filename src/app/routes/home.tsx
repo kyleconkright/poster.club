@@ -2,9 +2,13 @@ import * as React from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
+import axios from 'axios';
+import { setTitle } from './../store/actions';
+
 interface HomeProps {
     title: string;
     match: any;
+    setTitle: any;
 }
 
 interface HomeState {
@@ -17,13 +21,20 @@ class Home extends React.Component<HomeProps, HomeState> {
         super(props);
     }
 
+    private getData() {
+        axios.get('http://localhost:3000').then((res: any) => {
+            this.props.setTitle(res.data.hi)
+        });
+    }
+
     componentDidMount() {
+        this.getData();
     }
 
     render() {
         return (
             <section id="home">
-               <h1>{ this.props.match.params.id ? this.props.match.params.id : 'hello'}</h1>
+               <h1>{ this.props.title }</h1>
             </section>
         )
     }
@@ -36,7 +47,9 @@ const mapPropsToState = (state: HomeState) => {
 }
 
 const mapDispatchToProps = (dispatch: any) => {
-    return bindActionCreators({}, dispatch)
+    return bindActionCreators({
+        setTitle: setTitle
+    }, dispatch)
 }
 
 export default connect(mapPropsToState, mapDispatchToProps)(Home);
