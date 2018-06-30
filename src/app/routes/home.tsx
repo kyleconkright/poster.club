@@ -23,7 +23,7 @@ class Home extends React.Component<HomeProps, HomeState> {
 
     private getData() {
         axios.get('http://localhost:3000').then((res: any) => {
-            this.props.setTitle(res.data.hi)
+            this.props.setTitle(res.data[0].thumbnail)
         });
     }
 
@@ -34,7 +34,7 @@ class Home extends React.Component<HomeProps, HomeState> {
     render() {
         return (
             <section id="home">
-               <h1>{ this.props.title }</h1>
+               <h1><img src={ this.props.title } /></h1>
             </section>
         )
     }
