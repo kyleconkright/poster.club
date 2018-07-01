@@ -1,18 +1,18 @@
-import { Get, Controller, Res } from '@nestjs/common';
+import { Get, Post, Controller, Res, Param } from '@nestjs/common';
 import { AppService } from './app.service';
 import { FirebaseService } from 'firebase.service';
 import { DocumentSnapshot } from '@google-cloud/firestore';
+import { ScalablePressService } from 'scalable-press.service';
 
 @Controller()
 export class AppController {
   constructor(
-    private readonly appService: AppService,
-    private readonly firebaseService: FirebaseService
+    private readonly firebaseService: FirebaseService,
+    private readonly scalablePressService: ScalablePressService
   ) {}
 
-  @Get()
+  @Get('products')
   root(@Res() res) {
-    
     this.firebaseService.fetchAllProducts().then(querySnapshot => {
       let data = [];
       querySnapshot.forEach((documentSnapshot: DocumentSnapshot) => {
@@ -21,4 +21,19 @@ export class AppController {
       res.json(data);
     })
   }
+
+  @Get('products/:id')
+  fetchProduct(@Res() res, @Param() params) {
+    this.firebaseService.fetchProduct(params.id).then(response => {
+      res.json(response.data());
+    })
+  }
+
+  @Get('products/:id/quote')
+  fetchProductQuote(@Res() res, @Param() params) {
+    this.scalablePressService.fetchQuoteForProduct(params.id).then(quote => {
+      res.json({'quote': quote.data})
+    })
+  }
+
 }

@@ -16,5 +16,9 @@ export class FirebaseService {
   fetchAllProducts() {
     return database.get();
   }
-  
+
+  fetchProduct(id) {
+      return database.doc(id).get();
+  }
+
 }
