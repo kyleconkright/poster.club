@@ -20,5 +20,9 @@ export class FirebaseService {
   fetchProduct(id) {
       return database.doc(id).get();
   }
+  
+  updateProduct(id, product) {
+      return database.doc(id).update(product);
+  }
 
 }
