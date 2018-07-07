@@ -23,11 +23,9 @@ class App extends React.Component {
 
     render() {
         return (
-            <div id="root">
-                <Routes />
-            </div>
+            <Routes />
         )
     }
 }
 
-ReactDOM.render(<Provider store={store}><App /></Provider>, window.document.getElementById('app'));
+ReactDOM.render(<Provider store={store}><App /></Provider>, window.document.getElementById('root'));

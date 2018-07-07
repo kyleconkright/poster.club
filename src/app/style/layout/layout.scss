@@ -1,0 +1,57 @@
+@import '../var';
+@import 'header';
+@import 'sidebar';
+
+#app {
+    min-height: 100vh;
+    display: grid;
+    grid-template: 
+        "sidebar content" 1fr
+        "sidebar footer" 50px
+        / 3fr 4fr;
+}
+
+aside {
+    grid-area: sidebar;
+    display: grid;
+    grid-template: 
+        "aside-header" 50px
+        "aside-content" 1fr;
+    header {
+        grid-area: aside-header;
+    }
+}
+
+main {
+    grid-area: content;
+    section {
+        display: grid;
+        grid-template: 
+            "section-header" 50px
+            "section-content" 1fr;
+        header {
+            grid-area: section-header;
+        }
+        .content {
+            padding: 0 $space;
+            grid-area: section-content;
+        }
+    }
+}
+
+// main {
+//     height: 100%;
+//     section {
+//         height: 100%;
+//         display: grid;
+//         grid-template: 
+//             "main-header" 50px
+//             "content" 1fr;
+//         header {
+//             grid-area: main-header;
+//         }
+//         div.content {
+//             grid-area: content;
+//         }
+//     }
+// }

@@ -2,18 +2,22 @@ import * as React from 'react';
 import { BrowserRouter, Route, Switch, Link } from 'react-router-dom';
 
 import Home from './Home';
+import CreateAccountComponent from './../containers/create-account';
 
 export default () => (
     <BrowserRouter>
-        <main>
-            <header>
-                <h1>freshwall</h1>
-            </header>
-            <aside></aside>
-            <Switch>
-                <Route path="/" exact render={(props: any) => <Home {...props} />} />
-                <Route path="/:id" exact render={(props: any) => <Home {...props} />} />
-            </Switch>
-        </main>
+        <div id="app">
+            <aside>
+                <header>
+                    <h1>freshwall</h1>
+                </header>
+            </aside>
+            <main>
+                <Switch>
+                    <Route path="/" exact render={(props: any) => <Home {...props} />} />
+                    <Route path="/account/create" exact render={(props: any) => <CreateAccountComponent {...props} />} />
+                </Switch>
+            </main>
+        </div>
     </BrowserRouter>
 );

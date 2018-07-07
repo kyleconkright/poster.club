@@ -34,8 +34,11 @@ class Home extends React.Component<HomeProps, HomeState> {
     render() {
         return (
             <section id="home">
-                <p>Keep your walls fresh with plans starting as low as $15 a month</p>
-                <button>Get Started</button>
+                <header></header>
+                <div className="content">
+                    <p>Keep your walls fresh with plans starting as low as $15 a month</p>
+                    <button>Get Started</button>
+                </div>
             </section>
         )
     }

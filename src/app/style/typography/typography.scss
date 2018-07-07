@@ -1,0 +1,12 @@
+@import '../var';
+
+body {
+    font-family: "Verlag A", "Verlag B";
+    color: $dark;
+}
+
+h1 {
+    color: $dark;
+    // padding: $space;
+    font-size: 1.375rem;
+}
