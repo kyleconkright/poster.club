@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 import axios from 'axios';
 import { setTitle } from './../store/actions';
@@ -34,10 +35,12 @@ class Home extends React.Component<HomeProps, HomeState> {
     render() {
         return (
             <section id="home">
-                <header></header>
+                <header>
+                    {/* <h1>freshwall</h1> */}
+                </header>
                 <div className="content">
                     <p>Keep your walls fresh with plans starting as low as $15 a month</p>
-                    <button>Get Started</button>
+                    <Link className="button" to={'account/create'}>Get Started</Link>
                 </div>
             </section>
         )

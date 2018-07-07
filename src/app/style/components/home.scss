@@ -1,13 +1,17 @@
 section#home {
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    flex-direction: column;
-    p {
-        font-size: 2.5rem;
-        text-align: left;
-    }
-    button {
-        font-size: 1.5rem;
+    // padding: 0 $space * 3;
+    .content {
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        flex-direction: column;
+        height: 100%;
+        p {
+            font-size: 2.5rem;
+            text-align: left;
+        }
+        a.button {
+            font-size: 1.25rem;
+        }
     }
 }

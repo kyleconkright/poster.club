@@ -1,4 +1,4 @@
-button {
+button, .button {
     background: $purple;
     border: none;
     color: white;
@@ -6,4 +6,5 @@ button {
     padding: $space ($space * 1.5);
     border-radius: 2px;
     margin: $space 0 0;
+    display: inline-block;
 }

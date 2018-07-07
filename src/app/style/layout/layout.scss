@@ -14,6 +14,7 @@
 aside {
     grid-area: sidebar;
     display: grid;
+    padding: 0 $space;
     grid-template: 
         "aside-header" 50px
         "aside-content" 1fr;
@@ -24,8 +25,11 @@ aside {
 
 main {
     grid-area: content;
+    height: 100%;
+    padding: 0 $space * 2;
     section {
         display: grid;
+        height: 100%;
         grid-template: 
             "section-header" 50px
             "section-content" 1fr;
@@ -33,7 +37,6 @@ main {
             grid-area: section-header;
         }
         .content {
-            padding: 0 $space;
             grid-area: section-content;
         }
     }
