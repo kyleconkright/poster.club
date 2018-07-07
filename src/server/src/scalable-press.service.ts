@@ -11,13 +11,19 @@ export class ScalablePressService {
     ) { }
 
     async fetchQuoteForProduct(id) {
-        var img = await this.firebaseService.fetchProduct(id);
+        var product = await this.firebaseService.fetchProduct(id);
+        try {
+            var order = await axios.get(`https://api.scalablepress.com/v2/quote/${product.data().orderToken}`, {auth});
+            return order.data;
+        } catch(error) {
+            console.log(error.response.data.issues);
+        }
         try {
             var design = await axios.post('https://api.scalablepress.com/v2/design', {
                 type: 'poster',
                 sides: {
                     front: {
-                        artwork: img.data().img_url,
+                        artwork: product.data().img_url,
                         dimensions: {
                             width: 24
                         }
@@ -55,7 +61,7 @@ export class ScalablePressService {
             designId: design.data.designId,
             orderToken: order.data.orderToken
         })
-        return design;
+        return order.data;
     }
 }
 

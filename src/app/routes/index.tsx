@@ -6,6 +6,10 @@ import Home from './Home';
 export default () => (
     <BrowserRouter>
         <main>
+            <header>
+                <h1>freshwall</h1>
+            </header>
+            <aside></aside>
             <Switch>
                 <Route path="/" exact render={(props: any) => <Home {...props} />} />
                 <Route path="/:id" exact render={(props: any) => <Home {...props} />} />

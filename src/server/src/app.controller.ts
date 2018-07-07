@@ -32,7 +32,7 @@ export class AppController {
   @Get('products/:id/quote')
   fetchProductQuote(@Res() res, @Param() params) {
     this.scalablePressService.fetchQuoteForProduct(params.id).then(quote => {
-      res.json({'quote': quote.data})
+      res.json(quote)
     })
   }
 

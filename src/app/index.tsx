@@ -2,7 +2,7 @@ import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 
 import Routes from './../app/routes/index';
-// const css = require('./../style/style.scss');
+const css = require('./style/style.scss');
 
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';

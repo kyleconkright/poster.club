@@ -12,7 +12,7 @@ var config = {
         publicPath: '/'
     },
     resolve: {
-        extensions: ['.tsx', '.ts', '.js']
+        extensions: ['.tsx', '.ts', '.js', '.scss']
     },
     devServer: {
         historyApiFallback: true
@@ -23,6 +23,10 @@ var config = {
                 test: /\.tsx?/,
                 use: 'ts-loader',
                 exclude: /node_modules/
+            },
+            {
+                test: /\.scss$/,
+                use: ['style-loader', 'css-loader', 'sass-loader']
             }
         ]
 
