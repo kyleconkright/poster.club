@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { BrowserRouter, Route, Switch, Link } from 'react-router-dom';
 
 import Home from './Home';
 import CreateAccountComponent from './../containers/create-account';
@@ -9,7 +9,7 @@ export default () => (
         <div id="app">
             <aside>
                 <header>
-                    <h1>freshwall</h1>
+                    <h1><Link to={'/'}>freshwall</Link></h1>
                 </header>
             </aside>
             <main>

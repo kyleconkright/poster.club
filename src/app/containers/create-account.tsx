@@ -13,9 +13,16 @@ class CreateAccountComponent extends React.Component<CreateAccountProps, CreateA
         return (
             <section id="create-account">
                 <header>
-                    <h1>Create Account</h1>
+                    <h1>Get Started</h1>
                 </header>
-                <div className="content">This is where you'll create your account</div>
+                <div className="content">
+                    <form className="flex-form">
+                        <input type="text" placeholder="name@email.com" />
+                        <input type="text" placeholder="•••••••••" />
+                        <input type="text" placeholder="•••••••••" />
+                        <button>Create Account</button>
+                    </form>
+                </div>
             </section>
         )
     }

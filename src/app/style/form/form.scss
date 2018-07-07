@@ -1,1 +1,7 @@
 @import 'button';
+@import 'input';
+
+form.flex-form {
+    display: flex;
+    flex-direction: column;
+}

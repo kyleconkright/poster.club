@@ -1,0 +1,9 @@
+input {
+    border: 1px solid #ccc;
+    padding: .45rem .75rem;
+    background: none;
+    margin: 0 0 $space/2;
+    &:last-of-type {
+        margin: 0 0 0 0;
+    }
+}
