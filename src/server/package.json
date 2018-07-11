@@ -26,6 +26,7 @@
     "firebase-admin": "^5.12.1",
     "reflect-metadata": "^0.1.12",
     "rxjs": "^6.0.0",
+    "stripe": "^6.2.1",
     "typescript": "^2.9.2"
   },
   "devDependencies": {

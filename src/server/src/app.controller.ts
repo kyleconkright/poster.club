@@ -1,5 +1,4 @@
 import { Get, Post, Controller, Res, Param } from '@nestjs/common';
-import { AppService } from './app.service';
 import { FirebaseService } from 'firebase.service';
 import { DocumentSnapshot } from '@google-cloud/firestore';
 import { ScalablePressService } from 'scalable-press.service';
