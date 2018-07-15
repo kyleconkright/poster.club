@@ -1,9 +1,13 @@
 input {
     border: 1px solid #ccc;
-    padding: .45rem .75rem;
+    border-width: 0 0 1px;
+    padding: $space/2 0;
     background: none;
     margin: 0 0 $space/2;
     &:last-of-type {
         margin: 0 0 0 0;
+    }
+    &.input-large {
+        font-size: 2rem;
     }
 }

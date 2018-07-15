@@ -23,9 +23,9 @@ class Home extends React.Component<HomeProps, HomeState> {
     }
 
     private getData() {
-        axios.get('http://localhost:3000/products').then((res: any) => {
-            this.props.setTitle(res.data[0].title)
-        });
+        // axios.get('http://localhost:3000/products').then((res: any) => {
+            // this.props.setTitle(res.data[0].title)
+        // });
     }
 
     componentDidMount() {
@@ -40,7 +40,7 @@ class Home extends React.Component<HomeProps, HomeState> {
                 </header>
                 <div className="content">
                     <p>Keep your walls fresh with plans starting as low as $15 a month</p>
-                    <Link className="button" to={'account/create'}>Get Started</Link>
+                    <Link className="button" to={'order/create'}>Get Started</Link>
                 </div>
             </section>
         )

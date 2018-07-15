@@ -15,7 +15,7 @@ export default () => (
             <main>
                 <Switch>
                     <Route path="/" exact render={(props: any) => <Home {...props} />} />
-                    <Route path="/account/create" exact render={(props: any) => <CreateAccountComponent {...props} />} />
+                    <Route path="/order/create" exact render={(props: any) => <CreateAccountComponent {...props} />} />
                 </Switch>
             </main>
         </div>
