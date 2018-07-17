@@ -5,36 +5,47 @@ import { bindActionCreators } from 'redux';
 import * as orderActions from './../../store/actions/order';
 
 interface CustomerInfoProps {
-    order: {},
+    customerName: string,
     setCustomerName: orderActions.SetCustomerNameActionType;
 }
 
-interface CustomerInfoState {}
+interface CustomerInfoState {
+    customerName: string;
+}
 
 class CustomerInfo extends React.Component<CustomerInfoProps, CustomerInfoState>  {
 
     constructor(props) {
         super(props)
         this.handleChange = this.handleChange.bind(this);
+        this.handleSave = this.handleSave.bind(this);
     }
 
     handleChange(event) {
-        console.log(event.target.value);
+        this.setState({customerName: event.target.value});
+    }
+    
+    handleSave() {
+        if(this.state && this.state.customerName) {
+            this.props.setCustomerName(this.state.customerName);
+        }
     }
 
     render() {
         return (
-            <form className="flex-form">
+            <div className="flex-form">
                 <label>Who are we shipping this to?</label>
-                <input className="input-large" onChange={this.handleChange} name="customer-name" type="customer-name" placeholder="Bobby Pin" />
-                <button>Next</button>
-            </form>
+                <input className="input-large" onChange={this.handleChange} onBlur={this.handleSave} name="customer-name" type="customer-name" placeholder="Bobby Pin" />
+                {this.props.customerName === '' ? <button onClick={this.handleSave}>Next</button> : null}
+            </div>
         )
     }
 }
 
 const mapPropsToState = (state) => {
-    order: state.order
+    return {
+        customerName: state.order.customerName
+    }
 }
 
 const mapDispatchToProps = (dispatch: any) => {

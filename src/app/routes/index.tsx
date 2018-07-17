@@ -2,7 +2,7 @@ import * as React from 'react';
 import { BrowserRouter, Route, Switch, Link } from 'react-router-dom';
 
 import Home from './Home';
-import CreateAccountComponent from './../containers/create-account';
+import CreateOrder from './../containers/create-order';
 
 export default () => (
     <BrowserRouter>
@@ -15,7 +15,7 @@ export default () => (
             <main>
                 <Switch>
                     <Route path="/" exact render={(props: any) => <Home {...props} />} />
-                    <Route path="/order/create" exact render={(props: any) => <CreateAccountComponent {...props} />} />
+                    <Route path="/order/create" exact render={(props: any) => <CreateOrder {...props} />} />
                 </Switch>
             </main>
         </div>

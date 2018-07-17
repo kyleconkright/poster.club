@@ -2,48 +2,35 @@ import * as React from 'react';
 import { Elements, StripeProvider } from 'react-stripe-elements';
 import CheckoutForm from './checkout-form';
 import CustomerInfo from './order/customer-info';
-import Autocomplete from 'react-google-autocomplete';
-import Script from 'react-load-script'
+import CustomerAddress from './order/customer-address';
 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-interface CreateAccountProps {
-
+interface CreateOrderProps {
+    customerName: string,
+    address: object
 }
 
-interface CreateAccountState {
-    thing: JSX.Element
-}
+interface CreateOrderState {}
 
-class CreateAccountComponent extends React.Component<CreateAccountProps, CreateAccountState> {
+class CreateOrder extends React.Component<CreateOrderProps, CreateOrderState> {
 
     constructor(props) {
         super(props)
-        this.state = {
-            thing: <input /> as JSX.Element
-        }
-    }
-
-    handleScriptLoad() {
-        this.setState({thing: <Autocomplete
-            style={{ width: '100%', border: 'none' }}
-            onPlaceSelected={(place) => {
-                console.log(place);
-            }}
-            types={['address']}
-            componentRestrictions={{ country: "us" }}
-        />})
     }
 
     render() {
         return (
             <section id="create-account">
                 <header>
-                    <h1>Get Started</h1>
+                    <h1>Place your order</h1>
                 </header>
 
-                <CustomerInfo />
+                <div className="content">
+                    {this.props.customerName === '' ? <CustomerInfo /> : null}
+                    {this.props.customerName !== '' ? <CustomerAddress /> : null}
+                </div>
 
                 {/* <StripeProvider apiKey="pk_test_LwL4RUtinpP3PXzYirX2jNfR">
                     <div className="example">
@@ -54,9 +41,6 @@ class CreateAccountComponent extends React.Component<CreateAccountProps, CreateA
                     </div>
                 </StripeProvider>
 
-                <Script url="https://maps.googleapis.com/maps/api/js?key=AIzaSyCxI0i25U1Yx1SE5fOjrvkG_Wh_rg4Mix0&libraries=places"
-                    onLoad={this.handleScriptLoad.bind(this)}
-                />
                 { this.state.thing } */}
 
                 {/* <div className="content">
@@ -72,12 +56,15 @@ class CreateAccountComponent extends React.Component<CreateAccountProps, CreateA
     }
 }
 
-const mapPropsToState = (state: CreateAccountState) => {
-    return {}
+const mapPropsToState = (state) => {
+    return {
+        customerName: state.order.customerName,
+        address: state.order.address
+    }
 }
 
 const mapDispatchToProps = (dispatch: any) => {
     return bindActionCreators({}, dispatch)
 }
 
-export default connect(mapPropsToState, mapDispatchToProps)(CreateAccountComponent);
+export default connect(mapPropsToState, mapDispatchToProps)(CreateOrder);

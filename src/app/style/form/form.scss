@@ -1,8 +1,9 @@
 @import 'button';
 @import 'input';
 
-form.flex-form {
+form.flex-form, div.flex-form {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    margin: 0 0 2rem;
 }

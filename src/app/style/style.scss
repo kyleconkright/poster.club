@@ -11,6 +11,11 @@
     font-size: inherit;
     color: inherit;
     outline: none;
+    // &:last-of-type {margin-bottom: 0}
+}
+
+.no-border {
+    border: none;
 }
 
 input:-webkit-autofill {
