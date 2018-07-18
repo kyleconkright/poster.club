@@ -12,6 +12,12 @@ export const INITIAL_STATE = {
 
 export function OrderReducer(state = INITIAL_STATE, action) {
     switch (action.type) {
+        case orderActions.FETCH_ORDER_QUOTE:
+            return {
+                ...state,
+                loaded: false,
+                loading: true
+            };
         case orderActions.SET_CUSTOMER_NAME:
             return {
                 ...state,
@@ -26,7 +32,8 @@ export function OrderReducer(state = INITIAL_STATE, action) {
                     ...action.payload,
                     loaded: true
                 },
-                loaded: true
+                loaded: true,
+                loading: false
             };
         case orderActions.SET_CUSTOMER_ADDRESS_LOADED:
             return {

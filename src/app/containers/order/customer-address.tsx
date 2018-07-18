@@ -11,13 +11,16 @@ import axios from 'axios';
 interface CustomerAddressProps {
     address: any,
     customerName: string,
+    loading: boolean,
+    loaded: boolean,
+    fetchOrderQuote: orderActions.FetchOrderQuoteActionType,
     setCustomerAddress: orderActions.SetCustomerAddressActionType,
     setCustomerAddressLoaded: orderActions.SetCustomerAddressLoadedActionType,
 }
 
 interface CustomerAddressState {
     addressInput: JSX.Element,
-    address: string
+    address: object
 }
 
 class CustomerAddress extends React.Component<CustomerAddressProps, CustomerAddressState>  {
@@ -26,9 +29,11 @@ class CustomerAddress extends React.Component<CustomerAddressProps, CustomerAddr
         super(props)
         this.handleScriptLoad = this.handleScriptLoad.bind(this);
         this.handleSave = this.handleSave.bind(this);
+        this.validateAddress = this.validateAddress.bind(this);
+        this.loading = this.loading.bind(this);
 
         this.state = {
-            address: '',
+            address: {},
             addressInput: <input /> as JSX.Element
         }
     }
@@ -39,8 +44,7 @@ class CustomerAddress extends React.Component<CustomerAddressProps, CustomerAddr
         this.setState({addressInput: <Autocomplete
             style={this.addressStyle}
             onPlaceSelected={(place) => {
-                this.setState({address: place.adr_address})
-                this.props.setCustomerAddressLoaded(true);
+                this.handleSave(place.adr_address);
             }}
             types={['address']}
             componentRestrictions={{ country: "us" }}
@@ -48,17 +52,27 @@ class CustomerAddress extends React.Component<CustomerAddressProps, CustomerAddr
         />})
     }
 
-    handleSave() {
+    handleSave(address) {
         const el = document.createElement('html');
-        el.innerHTML = this.state.address;
-        const street1 = el.getElementsByClassName('street-address')[0];
+        el.innerHTML = address;
+        const address1 = el.getElementsByClassName('street-address')[0];
+        const address2 = document.getElementsByClassName('address2')[0];
         const city = el.getElementsByClassName('locality')[0];
         const state = el.getElementsByClassName('region')[0];
-        const postalCode = el.getElementsByClassName('postal-code')[0];
-        const address = {street1: street1.textContent, city: city.textContent, state: state.textContent, postalCode: postalCode.textContent};
-        console.log(address);
-        axios.post('http://localhost:3000/products/MkusRDmu77wwfdtxdDw9/quote', address)
-        this.props.setCustomerAddress(address);
+        const zip = el.getElementsByClassName('postal-code')[0];
+        this.setState({address: {address1: address1.textContent, address2: address2.textContent, city: city.textContent, state: state.textContent, zip: zip.textContent}});
+    }
+    
+    validateAddress() {
+        console.log(this.state.address);
+        this.props.fetchOrderQuote();
+        axios.post('http://localhost:3000/products/MkusRDmu77wwfdtxdDw9/quote', {name: this.props.customerName, ...this.state.address}).then(res => {
+            this.props.setCustomerAddress(this.state.address);
+        })
+    }
+
+    loading() {
+        return this.props.loading ? 'loading' : null;
     }
 
     render() {
@@ -70,8 +84,8 @@ class CustomerAddress extends React.Component<CustomerAddressProps, CustomerAddr
                 />
                 <label>Where would you like it shipped?</label>
                 {this.state.addressInput}
-                { this.props.address.loaded ? <input name="suite" className="input-large" placeholder="suite (optional)" /> : null}
-                { this.props.address.loaded ? <button onClick={this.handleSave}>Validate Address</button> : null }
+                { this.state.address ? <input name="suite" className={`address2 input-large`} placeholder="suite (optional)" /> : null}
+                { this.state.address ? <button className={this.loading()} disabled={this.props.loading} onClick={this.validateAddress}>Validate Address</button> : null }
             </div>
         )
     }
@@ -79,6 +93,8 @@ class CustomerAddress extends React.Component<CustomerAddressProps, CustomerAddr
 
 const mapPropsToState = (state) => {
     return {
+        loading: state.order.loading,
+        loaded: state.order.loaded,
         address: state.order.address,
         customerName: state.order.customerName
     }
@@ -86,6 +102,7 @@ const mapPropsToState = (state) => {
 
 const mapDispatchToProps = (dispatch: any) => {
     return bindActionCreators({
+        fetchOrderQuote: orderActions.fetchOrderQuote,
         setCustomerAddress: orderActions.setCustomerAddress,
         setCustomerAddressLoaded: orderActions.setCustomerAddressLoaded
     }, dispatch)
