@@ -1,5 +1,5 @@
 import { Post, Controller, Body, Res, Req } from '@nestjs/common';
-const stripe = require('stripe')("sk_test_TwTTlid3GeOG6YPydOjARw4I");
+const stripe = require('stripe')('sk_test_TwTTlid3GeOG6YPydOjARw4I');
 
 @Controller()
 export class ChargeController {
@@ -11,9 +11,9 @@ export class ChargeController {
         try {
             let { status } = await stripe.charges.create({
                 amount: 2000,
-                currency: "usd",
-                description: "An example charge",
-                source: req.body.body
+                currency: 'usd',
+                description: 'An example charge',
+                source: req.body.body,
             });
             console.log(status);
             res.json({ status });

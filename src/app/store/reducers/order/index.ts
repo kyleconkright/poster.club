@@ -28,6 +28,16 @@ export function OrderReducer(state = INITIAL_STATE, action) {
                 },
                 loaded: true
             };
+        case orderActions.SET_CUSTOMER_ADDRESS_LOADED:
+            return {
+                ...state,
+                address: {
+                    ...state.address,
+                    ...action.payload,
+                    loaded: true
+                },
+                loaded: true
+            };
         default:
             return state;
     }

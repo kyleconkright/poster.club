@@ -6,11 +6,13 @@ import Autocomplete from 'react-google-autocomplete';
 
 import * as orderActions from './../../store/actions/order';
 import { project } from './../../../../config';
+import axios from 'axios';
 
 interface CustomerAddressProps {
     address: any,
     customerName: string,
-    setCustomerAddress: orderActions.SetCustomerAddressActionType;
+    setCustomerAddress: orderActions.SetCustomerAddressActionType,
+    setCustomerAddressLoaded: orderActions.SetCustomerAddressLoadedActionType,
 }
 
 interface CustomerAddressState {
@@ -38,9 +40,11 @@ class CustomerAddress extends React.Component<CustomerAddressProps, CustomerAddr
             style={this.addressStyle}
             onPlaceSelected={(place) => {
                 this.setState({address: place.adr_address})
+                this.props.setCustomerAddressLoaded(true);
             }}
             types={['address']}
             componentRestrictions={{ country: "us" }}
+            
         />})
     }
 
@@ -53,6 +57,7 @@ class CustomerAddress extends React.Component<CustomerAddressProps, CustomerAddr
         const postalCode = el.getElementsByClassName('postal-code')[0];
         const address = {street1: street1.textContent, city: city.textContent, state: state.textContent, postalCode: postalCode.textContent};
         console.log(address);
+        axios.post('http://localhost:3000/products/MkusRDmu77wwfdtxdDw9/quote', address)
         this.props.setCustomerAddress(address);
     }
 
@@ -66,7 +71,7 @@ class CustomerAddress extends React.Component<CustomerAddressProps, CustomerAddr
                 <label>Where would you like it shipped?</label>
                 {this.state.addressInput}
                 { this.props.address.loaded ? <input name="suite" className="input-large" placeholder="suite (optional)" /> : null}
-                    <button onClick={this.handleSave}>Validate Address</button>
+                { this.props.address.loaded ? <button onClick={this.handleSave}>Validate Address</button> : null }
             </div>
         )
     }
@@ -81,7 +86,8 @@ const mapPropsToState = (state) => {
 
 const mapDispatchToProps = (dispatch: any) => {
     return bindActionCreators({
-        setCustomerAddress: orderActions.setCustomerAddress
+        setCustomerAddress: orderActions.setCustomerAddress,
+        setCustomerAddressLoaded: orderActions.setCustomerAddressLoaded
     }, dispatch)
 }
 

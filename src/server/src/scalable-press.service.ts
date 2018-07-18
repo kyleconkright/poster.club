@@ -7,25 +7,26 @@ import { project } from './../../../config';
 export class ScalablePressService {
 
     constructor(
-        private readonly firebaseService: FirebaseService
+        private readonly firebaseService: FirebaseService,
     ) { }
 
-    async fetchQuoteForProduct(id) {
-        var product = await this.firebaseService.fetchProduct(id);
+    async fetchQuoteForProduct(id, address) {
+        const product = await this.firebaseService.fetchProduct(id);
         try {
-            var order = await axios.get(`https://api.scalablepress.com/v2/quote/${product.data().orderToken}`, {auth});
+            const order = await axios.get(`https://api.scalablepress.com/v2/quote/${product.data().orderToken}`, {auth});
+            console.log(order.data);
             return order.data;
         } catch(error) {
             console.log(error.response.data.issues);
         }
         try {
-            var design = await axios.post('https://api.scalablepress.com/v2/design', {
+            const design = await axios.post('https://api.scalablepress.com/v2/design', {
                 type: 'poster',
                 sides: {
                     front: {
                         artwork: product.data().img_url,
                         dimensions: {
-                            width: 24
+                            width: 24,
                         }
                     }
                 }
@@ -34,7 +35,7 @@ export class ScalablePressService {
             console.error();
         }
         try {
-            var order = await axios.post('https://api.scalablepress.com/v2/quote', {
+            const order = await axios.post('https://api.scalablepress.com/v2/quote', {
                 type: 'poster',
                 sides: {front: 1},
                 products: [
@@ -45,10 +46,10 @@ export class ScalablePressService {
                         size: 'one'
                     }
                 ],
-                address: address,
+                address,
                 designId: design.data.designId,
             }, {
-                auth: auth,
+                auth,
                 headers: {
                     'Content-Type': 'application/json' 
                 }
@@ -61,13 +62,14 @@ export class ScalablePressService {
             designId: design.data.designId,
             orderToken: order.data.orderToken
         })
+        console.log(order.data);
         return order.data;
     }
 }
 
 const auth = {
     username: 'Freshwall',
-    password: project.scalablePressKey
+    password: project.scalablePressKey,
 }
 
 const address = {
@@ -76,4 +78,4 @@ const address = {
     city: 'Los Angeles',
     state: 'CA',
     zip: '90046'
-}
+};
