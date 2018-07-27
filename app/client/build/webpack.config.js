@@ -1,11 +1,11 @@
 let path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
-var DIST_DIR = path.resolve(__dirname, 'dist');
-var SRC_DIR = path.resolve(__dirname, 'src');
+var DIST_DIR = path.resolve(__dirname, './../dist');
+var SRC_DIR = path.resolve(__dirname, './../src');
 
 var config = {
-    entry: SRC_DIR + '/app/index.tsx',
+    entry: SRC_DIR + '/index.tsx',
     output: {
         path: DIST_DIR + '/app',
         filename: 'bundle.js',
@@ -32,7 +32,7 @@ var config = {
 
     },
     plugins: [
-        new HtmlWebpackPlugin({ template: './src/index.html' })
+        new HtmlWebpackPlugin({ template: './../index.html' })
     ]
 }
 

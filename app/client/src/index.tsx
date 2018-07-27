@@ -1,7 +1,8 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 
-import Routes from './../app/routes/index';
+import Routes from './../src/routes/index';
+// require('dotenv').config();
 const css = require('./style/style.scss');
 
 import { createStore } from 'redux';

@@ -1,4 +1,4 @@
-import * as orderActions from './../../actions/order';
+import * as orderActions from '../../actions/order';
 
 export const INITIAL_STATE = {
     customerName: '',

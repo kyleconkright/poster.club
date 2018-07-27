@@ -2,7 +2,7 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import * as orderActions from './../../store/actions/order';
+import * as orderActions from '../../store/actions/order';
 
 interface CustomerInfoProps {
     customerName: string,

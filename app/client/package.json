@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "npm run build",
-    "build": "webpack -d && webpack-dev-server --watch",
+    "build": "cd build && webpack -d && webpack-dev-server --watch",
     "rebuild": "rm -rf ./node_modules && npm install",
     "build:prod": "webpack -p"
   },

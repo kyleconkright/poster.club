@@ -10,9 +10,9 @@
     "moduleResolution": "node"
   },
   "include": [
-    "./src/**/*"
+    "./app/**/*"
   ],
   "exclude": [
-    "./src/server"
+    "./app/server"
   ]
 }

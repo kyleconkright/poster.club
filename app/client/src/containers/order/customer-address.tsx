@@ -4,8 +4,8 @@ import { bindActionCreators } from 'redux';
 import Script from 'react-load-script';
 import Autocomplete from 'react-google-autocomplete';
 
-import * as orderActions from './../../store/actions/order';
-import { project } from './../../../../config';
+import * as orderActions from '../../store/actions/order';
+import { project } from './../../../../../config';
 import axios from 'axios';
 
 interface CustomerAddressProps {
