@@ -21,7 +21,6 @@ export const store = createStore(
 );
 
 class App extends React.Component {
-
     render() {
         return (
             <Routes />

@@ -4,14 +4,15 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "npm run build",
-    "build": "cd build && webpack -d && webpack-dev-server --watch",
+    "start:dev": "cross-env NODE_ENV=development npm run build:dev",
+    "build:dev": "cd build && webpack -d && webpack-dev-server --watch",
     "rebuild": "rm -rf ./node_modules && npm install",
     "build:prod": "webpack -p"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@types/node": "^10.5.3",
     "@types/react": "^16.4.2",
     "@types/react-dom": "^16.0.6",
     "axios": "^0.18.0",

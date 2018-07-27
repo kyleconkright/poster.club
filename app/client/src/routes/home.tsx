@@ -20,6 +20,7 @@ class Home extends React.Component<HomeProps, HomeState> {
 
     constructor(props: HomeProps) {
         super(props);
+        
     }
 
     private getData() {
@@ -30,13 +31,13 @@ class Home extends React.Component<HomeProps, HomeState> {
 
     componentDidMount() {
         this.getData();
+        console.log('process.env');
     }
 
     render() {
         return (
             <section id="home">
                 <header>
-                    {/* <h1>freshwall</h1> */}
                 </header>
                 <div className="content">
                     <p>Keep your walls fresh with plans starting as low as $15 a month</p>
