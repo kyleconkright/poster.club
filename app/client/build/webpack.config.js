@@ -1,4 +1,6 @@
 let path = require('path');
+
+const Dotenv = require('dotenv-webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 var DIST_DIR = path.resolve(__dirname, './../dist');
@@ -32,8 +34,16 @@ var config = {
 
     },
     plugins: [
-        new HtmlWebpackPlugin({ template: './../index.html' })
-    ]
+        new HtmlWebpackPlugin({ template: './../index.html' }),
+        new Dotenv({
+            path: `./${process.env.NODE_ENV}/.env`,
+            systemvars: true
+        })
+        
+    ],
+    node: {
+        fs: 'empty'
+    }
 }
 
 module.exports = config;

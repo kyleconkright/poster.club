@@ -31,7 +31,8 @@ class Home extends React.Component<HomeProps, HomeState> {
 
     componentDidMount() {
         this.getData();
-        console.log('process.env');
+        console.log(process.env.NODE_ENV);
+        console.log(process.env.DB_HOST);
     }
 
     render() {

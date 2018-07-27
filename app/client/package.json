@@ -4,10 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start:dev": "cross-env NODE_ENV=development npm run build:dev",
-    "build:dev": "cd build && webpack -d && webpack-dev-server --watch",
-    "rebuild": "rm -rf ./node_modules && npm install",
-    "build:prod": "webpack -p"
+    "start:dev": "npm run build:dev",
+    "start:prod": "npm run build:prod",
+    "build:dev": "cd build && cross-env NODE_ENV=development webpack-dev-server --watch",
+    "build:prod": "cd build && cross-env NODE_ENV=production webpack-dev-server --watch",
+    "rebuild": "rm -rf ./node_modules && npm install"
   },
   "author": "",
   "license": "ISC",
@@ -16,8 +17,9 @@
     "@types/react": "^16.4.2",
     "@types/react-dom": "^16.0.6",
     "axios": "^0.18.0",
+    "cross-env": "^5.2.0",
     "css-loader": "^0.28.11",
-    "dotenv": "^6.0.0",
+    "dotenv-webpack": "^1.5.7",
     "html-webpack-plugin": "^3.2.0",
     "node-sass": "^4.9.0",
     "react": "^16.4.1",
