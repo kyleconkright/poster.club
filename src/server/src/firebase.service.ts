@@ -8,21 +8,26 @@ export const app = admin.initializeApp({
   databaseURL: firebaseConfig.databaseURL,
 });
 
-const database = app.firestore().collection('products');
+const products = app.firestore().collection('products');
+const orders = app.firestore().collection('orders');
 
 @Injectable()
 export class FirebaseService {
 
   fetchAllProducts() {
-    return database.get();
+    return products.get();
   }
 
   fetchProduct(id) {
-      return database.doc(id).get();
+      return products.doc(id).get();
   }
   
   updateProduct(id, product) {
-      return database.doc(id).update(product);
+      return products.doc(id).update(product);
   }
+
+  createOrder(order) {
+    return orders.add(order);
+}
 
 }

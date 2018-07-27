@@ -22,7 +22,7 @@ button, .button {
         height: 2px;
     }
     &.loading {
-        color: transparent;
+        cursor: default;
     }
     &.loading:after {
         background: #c1c0cc;

@@ -1,6 +1,7 @@
 import { ActionResponse } from "../action";
 
 export const FETCH_ORDER_QUOTE = '[ORDER] Fetch Quote';
+export const CREATE_ORDER_SUCCESS = '[ORDER] Create Order Success';
 export const SET_CUSTOMER_NAME = '[ORDER] Set Customer Name';
 export const SET_CUSTOMER_ADDRESS = '[ORDER] Set Customer Address';
 export const SET_CUSTOMER_ADDRESS_LOADED = '[ORDER] Load Customer Google Address';
@@ -8,6 +9,7 @@ export const SET_CUSTOMER_ADDRESS_LOADED = '[ORDER] Load Customer Google Address
 export type FetchOrderQuoteActionType = () => ActionResponse<null>;
 export type SetCustomerNameActionType = (name: string) => ActionResponse<string | null>;
 export type SetCustomerAddressActionType = (address: object) => ActionResponse<object | null>;
+export type CreateOrderSuccessActionType = (order: object) => ActionResponse<object | null>;
 export type SetCustomerAddressLoadedActionType = (loaded: boolean) => ActionResponse<boolean | null>;
 
 export const fetchOrderQuote = (): Object => {

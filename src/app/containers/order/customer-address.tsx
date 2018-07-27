@@ -20,7 +20,7 @@ interface CustomerAddressProps {
 
 interface CustomerAddressState {
     addressInput: JSX.Element,
-    address: object
+    address: any,
 }
 
 class CustomerAddress extends React.Component<CustomerAddressProps, CustomerAddressState>  {
@@ -29,6 +29,7 @@ class CustomerAddress extends React.Component<CustomerAddressProps, CustomerAddr
         super(props)
         this.handleScriptLoad = this.handleScriptLoad.bind(this);
         this.handleSave = this.handleSave.bind(this);
+        this.handleChange = this.handleChange.bind(this);
         this.validateAddress = this.validateAddress.bind(this);
         this.loading = this.loading.bind(this);
 
@@ -56,15 +57,19 @@ class CustomerAddress extends React.Component<CustomerAddressProps, CustomerAddr
         const el = document.createElement('html');
         el.innerHTML = address;
         const address1 = el.getElementsByClassName('street-address')[0];
-        const address2 = document.getElementsByClassName('address2')[0];
+        const address2 = (document.getElementsByClassName('address2')[0] as HTMLInputElement);
         const city = el.getElementsByClassName('locality')[0];
         const state = el.getElementsByClassName('region')[0];
         const zip = el.getElementsByClassName('postal-code')[0];
-        this.setState({address: {address1: address1.textContent, address2: address2.textContent, city: city.textContent, state: state.textContent, zip: zip.textContent}});
+        this.setState({address: {address1: address1.textContent, address2: address2.value, city: city.textContent, state: state.textContent, zip: zip.textContent}});
+    }
+
+    handleChange(e) {
+        console.log(e.target.value);
+        this.setState({address: {...this.state.address, address2: e.target.value}})
     }
     
     validateAddress() {
-        console.log(this.state.address);
         this.props.fetchOrderQuote();
         axios.post('http://localhost:3000/products/MkusRDmu77wwfdtxdDw9/quote', {name: this.props.customerName, ...this.state.address}).then(res => {
             this.props.setCustomerAddress(this.state.address);
@@ -84,8 +89,8 @@ class CustomerAddress extends React.Component<CustomerAddressProps, CustomerAddr
                 />
                 <label>Where would you like it shipped?</label>
                 {this.state.addressInput}
-                { this.state.address ? <input name="suite" className={`address2 input-large`} placeholder="suite (optional)" /> : null}
-                { this.state.address ? <button className={this.loading()} disabled={this.props.loading} onClick={this.validateAddress}>Validate Address</button> : null }
+                { this.state.address ? <input name="suite" onChange={this.handleChange} className={`address2 input-large`} placeholder="suite (optional)" /> : null}
+                { this.state.address ? <button className={this.loading()} disabled={this.props.loading} onClick={this.validateAddress}>{this.props.loading ? 'Verifying...': 'Validate Address'}</button> : null }
             </div>
         )
     }
