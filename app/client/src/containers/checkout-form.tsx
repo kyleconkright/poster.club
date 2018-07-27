@@ -22,7 +22,7 @@ class CheckoutForm extends React.Component<CheckoutFormProps, CheckoutFormState>
         console.log(token);
         let response = await axios({
             method: 'POST',
-            url: 'http://localhost:3000/charge',
+            url: `${process.env.API_ROOT}/charge`,
             data: {
                 headers: { 'Content-Type': 'application/json' },
                 body: token.id

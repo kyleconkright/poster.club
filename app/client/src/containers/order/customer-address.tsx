@@ -71,7 +71,7 @@ class CustomerAddress extends React.Component<CustomerAddressProps, CustomerAddr
     
     validateAddress() {
         this.props.fetchOrderQuote();
-        axios.post('http://localhost:3000/products/MkusRDmu77wwfdtxdDw9/quote', {name: this.props.customerName, ...this.state.address}).then(res => {
+        axios.post(`http://${process.env.API_ROOT}/products/MkusRDmu77wwfdtxdDw9/quote`, {name: this.props.customerName, ...this.state.address}).then(res => {
             this.props.setCustomerAddress(this.state.address);
         })
     }
