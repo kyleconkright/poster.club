@@ -7,6 +7,9 @@ input {
     &:last-of-type {
         margin: 0 0 0 0;
     }
+    &.input-med {
+        font-size: 1.75rem;
+    }
     &.input-large {
         font-size: 2rem;
     }

@@ -6,4 +6,11 @@ form.flex-form, div.flex-form {
     flex-direction: column;
     justify-content: center;
     margin: 0 0 2rem;
+    div {
+        display: flex;
+        flex-direction: column;
+        &:not(:first-of-type) {
+            margin: 2rem 0 0;
+        }
+    }
 }

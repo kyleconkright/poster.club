@@ -45,6 +45,15 @@ export function OrderReducer(state = INITIAL_STATE, action) {
                 },
                 loaded: true
             };
+        case orderActions.RESET_CUSTOMER_ADDRESS:
+            return {
+                address: {
+                    loaded: false,
+                    loading: false
+                },
+                loaded: true,
+                loading: false
+            };
         default:
             return state;
     }

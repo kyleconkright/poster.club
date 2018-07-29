@@ -2,7 +2,6 @@ import * as React from 'react';
 import { Elements, StripeProvider } from 'react-stripe-elements';
 import CheckoutForm from './checkout-form';
 import CustomerInfo from './order/customer-info';
-import CustomerAddress from './order/customer-address';
 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -28,29 +27,8 @@ class CreateOrder extends React.Component<CreateOrderProps, CreateOrderState> {
                 </header>
 
                 <div className="content">
-                    {this.props.customerName === '' ? <CustomerInfo /> : null}
-                    {this.props.customerName !== '' ? <CustomerAddress /> : null}
+                    <CustomerInfo />
                 </div>
-
-                {/* <StripeProvider apiKey="pk_test_LwL4RUtinpP3PXzYirX2jNfR">
-                    <div className="example">
-                        <h1>React Stripe Elements Example</h1>
-                        <Elements>
-                            <CheckoutForm />
-                        </Elements>
-                    </div>
-                </StripeProvider>
-
-                { this.state.thing } */}
-
-                {/* <div className="content">
-                    <form className="flex-form">
-                        <input type="text" placeholder="name@email.com" />
-                        <input type="text" placeholder="•••••••••" />
-                        <input type="text" placeholder="•••••••••" />
-                        <button>Create Account</button>
-                    </form>
-                </div> */}
             </section>
         )
     }

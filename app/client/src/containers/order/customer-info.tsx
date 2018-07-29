@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import CustomerAddress from './customer-address';
 
 import * as orderActions from '../../store/actions/order';
 
@@ -18,25 +19,20 @@ class CustomerInfo extends React.Component<CustomerInfoProps, CustomerInfoState>
     constructor(props) {
         super(props)
         this.handleChange = this.handleChange.bind(this);
-        this.handleSave = this.handleSave.bind(this);
     }
 
     handleChange(event) {
-        this.setState({customerName: event.target.value});
-    }
-    
-    handleSave() {
-        if(this.state && this.state.customerName) {
-            this.props.setCustomerName(this.state.customerName);
-        }
+        this.props.setCustomerName(event.target.value);
     }
 
     render() {
         return (
             <div className="flex-form">
-                <label>Who are we shipping this to?</label>
-                <input className="input-large" onChange={this.handleChange} onBlur={this.handleSave} name="customer-name" type="customer-name" placeholder="Bobby Pin" />
-                {this.props.customerName === '' ? <button onClick={this.handleSave}>Next</button> : null}
+                <div>
+                    <label>Who are we shipping this to?</label>
+                    <input className="input-med" onChange={this.handleChange} name="customer-name" type="customer-name" placeholder="Bobby Pin" />
+                </div>
+                <CustomerAddress />
             </div>
         )
     }

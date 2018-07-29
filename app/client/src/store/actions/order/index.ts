@@ -4,6 +4,7 @@ export const FETCH_ORDER_QUOTE = '[ORDER] Fetch Quote';
 export const CREATE_ORDER_SUCCESS = '[ORDER] Create Order Success';
 export const SET_CUSTOMER_NAME = '[ORDER] Set Customer Name';
 export const SET_CUSTOMER_ADDRESS = '[ORDER] Set Customer Address';
+export const RESET_CUSTOMER_ADDRESS = '[ORDER] Reset Customer Address';
 export const SET_CUSTOMER_ADDRESS_LOADED = '[ORDER] Load Customer Google Address';
 
 export type FetchOrderQuoteActionType = () => ActionResponse<null>;
@@ -28,6 +29,13 @@ export const setCustomerName = (name: string): Object => {
 export const setCustomerAddress = (address: object): Object => {
     return {
         type: SET_CUSTOMER_ADDRESS,
+        payload: address
+    };
+};
+
+export const resetCustomerAddress = (address: object): Object => {
+    return {
+        type: RESET_CUSTOMER_ADDRESS,
         payload: address
     };
 };

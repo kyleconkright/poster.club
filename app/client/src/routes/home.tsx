@@ -6,33 +6,14 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { setTitle } from './../store/actions';
 
-interface HomeProps {
-    title: string;
-    match: any;
-    setTitle: any;
-}
+interface HomeProps {}
 
-interface HomeState {
-    title: any;
-}
+interface HomeState {}
 
 class Home extends React.Component<HomeProps, HomeState> {
 
     constructor(props: HomeProps) {
-        super(props);
-        
-    }
-
-    private getData() {
-        // axios.get('http://localhost:3000/products').then((res: any) => {
-            // this.props.setTitle(res.data[0].title)
-        // });
-    }
-
-    componentDidMount() {
-        this.getData();
-        console.log(process.env.NODE_ENV);
-        console.log(process.env.DB_HOST);
+        super(props);        
     }
 
     render() {
@@ -50,9 +31,7 @@ class Home extends React.Component<HomeProps, HomeState> {
 }
 
 const mapPropsToState = (state: HomeState) => {
-    return {
-        title: state.title,
-    }
+    return {}
 }
 
 const mapDispatchToProps = (dispatch: any) => {
